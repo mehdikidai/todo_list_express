@@ -1,24 +1,31 @@
 import mysql from "mysql2";
+import confing from "../confing.js";
 
 export const pool = mysql
     .createPool({
-        host: "127.0.0.1",
-        user: "root",
-        password: "",
-        database: "todo",
+        host: confing.DB_HOST,
+        user: confing.DB_USER,
+        password: confing.DB_PASS,
+        database: confing.DB_NAME,
     })
     .promise();
 
-class GetData {
-
-
+class Todo {
     constructor(pool) {
         this.pool = pool;
     }
 
+    async all() {
+        const [rows] = await pool.query(
+            "SELECT * FROM todo  ORDER BY todo.id DESC"
+        );
+        return rows;
+    }
 
-    async getTodo() {
-        const [rows] = await pool.query("SELECT * FROM todo");
+    async find(id) {
+        const [rows] = await pool.query("SELECT * FROM todo WHERE id = ?", [
+            id,
+        ]);
         return rows;
     }
 
@@ -28,7 +35,7 @@ class GetData {
             [content]
         );
         return {
-            id:result.insertId
+            id: result.insertId,
         };
     }
 
@@ -38,20 +45,20 @@ class GetData {
             [id]
         );
         return {
-            affectedRows:result.affectedRows
+            affectedRows: result.affectedRows,
         };
     }
 
-    async done(id){
-
-        const [result] = await pool.query(`UPDATE todo SET done = 1 ^ done WHERE todo.id = ?`,[id])
+    async done(id) {
+        const [result] = await pool.query(
+            `UPDATE todo SET done = 1 ^ done WHERE todo.id = ?`,
+            [id]
+        );
 
         return {
-            changedRows:result.changedRows
+            changedRows: result.changedRows,
         };
-
     }
-
 }
 
-export default new GetData(pool);
+export default new Todo(pool);

@@ -7,18 +7,22 @@ function td(el) {
     return `<li class="li_list">
   <div class="content">
 
-      <input type="text" data-id="${el.id}" value="${el.content}" class="${el.done ? "done" : ""}" readonly>
+      <input type="text" data-id="${el.id}" value="${el.content}" class="${
+        el.done ? "done" : ""
+    }" readonly>
       
   </div>
   <div class="actions">
       <button class="delete_todo" data-id="${el.id}">
           <i class="material-symbols-outlined"> delete </i>
       </button>
-      <button>
+      <button class="edit_todo" data-id="${el.id}" data-content="${el.content}">
           <i class="material-symbols-outlined"> edit_document </i>
       </button>
       <button class="done_todo" data-id="${el.id}">
-          <i class="material-symbols-outlined"> ${el.done ? 'close' : 'done'}  </i>
+          <i class="material-symbols-outlined"> ${
+              el.done ? "close" : "done"
+          }  </i>
       </button>
   </div>
 </li>`;
@@ -66,7 +70,7 @@ function showData(arr) {
 function deletTodo(id) {
     console.log(id);
     axios.delete(`http://localhost:3000/todo/${id}`).then((res) => {
-        console.log(res);
+        //console.log(res);
         getData().then((r) => {
             showData(r.data);
         });
@@ -74,13 +78,19 @@ function deletTodo(id) {
 }
 
 function doneTodo(id) {
-  console.log(id);
-  axios.put(`http://localhost:3000/todo`,{id:id}).then((res) => {
-      console.log(res);
-      getData().then((r) => {
-          showData(r.data);
-      });
-  });
+    console.log(id);
+    axios.put(`http://localhost:3000/todo`, { id: id }).then((res) => {
+        //console.log(res);
+        getData().then((r) => {
+            showData(r.data);
+        });
+    });
+}
+
+function updateTodo(id, content) {
+    console.log(id);
+    document.querySelector(`[]`)
+    todo_text.value = content;
 }
 
 const observer = new MutationObserver((obs) => {
@@ -93,6 +103,13 @@ const observer = new MutationObserver((obs) => {
         .querySelectorAll(".done_todo")
         .forEach((el) =>
             el.addEventListener("click", (t) => doneTodo(t.target.dataset.id))
+        );
+    document
+        .querySelectorAll(".edit_todo")
+        .forEach((el) =>
+            el.addEventListener("click", (t) =>
+                updateTodo(t.target.dataset.id, t.target.dataset.content)
+            )
         );
 
     //console.log(obs.length - 1);

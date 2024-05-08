@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import GetData from "./db/index.js";
+import Todo from "./db/index.js";
 
 const app = express();
 
@@ -15,29 +15,36 @@ app.use(cors());
 
 app.get("/",async (req, res) => {
 
-    const rows = await GetData.getTodo()
+    const rows = await Todo.all()
     res.json(rows);
 
 });
 
 app.post("/todo",async (req, res) => {
 
-    const rows = await GetData.addTodo(req.body.content)
-    res.status(201).json(rows);
+    const row = await Todo.addTodo(req.body.content)
+    res.status(201).json(row);
+
+});
+
+app.get("/todo/:id([0-9]{1,4})",async (req, res) => {
+
+    const [row] = await Todo.find(req.params.id)
+    res.status(201).json(row);
 
 });
 
 app.put("/todo",async (req, res) => {
 
-    const rows = await GetData.done(req.body.id)
-    res.status(201).json(rows);
+    const row = await Todo.done(req.body.id)
+    res.status(201).json(row);
     
 });
 
-app.delete("/todo/:id",async (req, res) => {
+app.delete("/todo/:id([0-9]{1,4})",async (req, res) => {
 
-    const rows = await GetData.deleteTodo(req.params.id)
-    res.status(201).json(rows);
+    const row = await Todo.deleteTodo(req.params.id)
+    res.status(201).json(row);
 
 });
 
