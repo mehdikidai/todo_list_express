@@ -145,15 +145,16 @@ body {
         ul {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            //gap: 10px;
             li {
-                background: var(--black_2);
+                //background: var(--black_2);
                 height: 44px;
                 //padding-inline: 20px;
                 display: flex;
                 //flex-direction: row-reverse;
-                border-radius: 4px;
-                border: 1px solid #ffffff0d;
+                //border-radius: 4px;
+                //border: 1px solid #ffffff0d;
+                border-bottom: 1px solid $main;
                 transition: all 0.4s ease-in;
 
                 .date_todo {
