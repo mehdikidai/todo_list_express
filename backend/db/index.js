@@ -1,14 +1,4 @@
-import mysql from "mysql2";
-import confing from "../confing.js";
-
-export const pool = mysql
-    .createPool({
-        host: confing.DB_HOST,
-        user: confing.DB_USER,
-        password: confing.DB_PASS,
-        database: confing.DB_NAME,
-    })
-    .promise();
+import { pool } from "./pool.js";
 
 class Todo {
     constructor(pool) {
@@ -16,7 +6,6 @@ class Todo {
     }
 
     async all() {
-        
         const [rows] = await pool.query(
             "SELECT * FROM todo  ORDER BY todo.id DESC LIMIT 8"
         );
@@ -24,7 +13,6 @@ class Todo {
     }
 
     async find(id) {
-
         const [rows] = await pool.query("SELECT * FROM todo WHERE id = ?", [
             id,
         ]);
@@ -32,8 +20,7 @@ class Todo {
     }
 
     async addTodo(content) {
-
-        const newContent = content.replace(/<[^>]+>/g,"")
+        const newContent = content.replace(/<[^>]+>/g, "");
 
         const [result] = await pool.query(
             `INSERT INTO todo (content) VALUES (?)`,
@@ -45,7 +32,7 @@ class Todo {
     }
 
     async update(id, content) {
-        const newContent = content.replace(/<[^>]+>/g,"")
+        const newContent = content.replace(/<[^>]+>/g, "");
         const [result] = await pool.query(
             `UPDATE todo SET content = ? WHERE todo.id = ?`,
             [newContent, id]
