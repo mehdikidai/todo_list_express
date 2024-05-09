@@ -11,6 +11,7 @@ $white:#fbfbfb;
     padding: 0;
     box-sizing: border-box;
     font-family: "Red Hat Display", sans-serif;
+    font-family: "Aldrich", sans-serif;
 }
 
 :root {
@@ -323,6 +324,6 @@ body {
 }
 
 .todo-notyf {
-    border: 2px solid rgba(81, 229, 255, 0.1);
+    border: 2px solid $main;
     border-radius: 4px;
 }
