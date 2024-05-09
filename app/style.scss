@@ -6,6 +6,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Red Hat Display", sans-serif;
+    
 }
 
 :root {
@@ -84,6 +85,7 @@ body {
             h1 {
                 font-size: 40px !important;
                 text-transform: uppercase;
+                font-family: "Press Start 2P", system-ui;
                 color: #fff;
                 user-select: none;
             }
