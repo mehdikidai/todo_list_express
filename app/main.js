@@ -51,7 +51,7 @@ function td(el) {
         el.id
     }">
           <i class="material-symbols-outlined"> ${
-              el.done ? "bookmark" : "done"
+              el.done ? "done" : "bookmark"
           }  </i>
       </button>
   </div>
