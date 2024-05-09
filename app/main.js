@@ -1,16 +1,40 @@
 import "./style.scss";
 import axios from "axios";
 import { z } from "zod";
-import moment from "./node_modules/moment/dist/moment.js";
+import { io } from "./lib/socket.js";
 
 let list = document.getElementById("list");
+const socket = io("ws://localhost:3000");
+var notyf = new Notyf({
+    types: [
+        {
+            type: "todo",
+            background: "#0000",
+            icon: false,
+            className: 'todo-notyf',
+        },
+    ],
+});
+
+socket.on("new todo", (msg) => {
+    console.log(msg);
+    notyf.open({
+        type:"todo",
+        message: msg,
+        duration: 3000,
+        icon: false,
+    });
+    getData().then((r) => {
+        showData(r.data);
+    });
+});
 
 const contentSchema = z.string().min(2).max(40).trim();
 
 function td(el) {
     return `<li class="li_list">
   <div class="${el.done ? "date_todo done" : "date_todo"}">
-  <span>${moment(el.date).fromNow()}</span>
+  <span>${el.date}</span>
   </div>
   <div class="content">
       <span class="${el.done ? "done" : ""}"></span>
@@ -44,9 +68,13 @@ form.addEventListener("submit", (e) => {
         axios
             .post("http://localhost:3000/todo", { content: todo_text.value })
             .then((res) => {
-                getData().then((r) => {
-                    showData(r.data);
-                });
+                if (res.status === 201) {
+                    socket.emit("action", "add");
+
+                    getData().then((r) => {
+                        showData(r.data);
+                    });
+                }
             })
             .finally(() => {
                 todo_text.value = "";
@@ -54,7 +82,7 @@ form.addEventListener("submit", (e) => {
     } else {
         swal({
             title: "mkin walo ?",
-            text:"Lorem Ipsum is simply dummy",
+            text: "Lorem Ipsum is simply dummy",
             button: {
                 text: "Close",
             },
@@ -74,7 +102,7 @@ getData().then((res) => {
 function showData(arr) {
     list.innerHTML = "";
 
-    console.log(arr);
+    //console.log(arr);
 
     arr.forEach((el) => {
         list.innerHTML += td(el);
@@ -91,8 +119,9 @@ function deletTodo(id) {
     }).then((willDelete) => {
         if (willDelete) {
             axios.delete(`http://localhost:3000/todo/${id}`).then((res) => {
-                console.log(res.data.affectedRows);
+                //console.log(res.data.affectedRows);
                 if (res.data.affectedRows === 1) {
+                    socket.emit("action", "delete");
                     getData().then((r) => {
                         showData(r.data);
                         //swal("Good job", "Lorem Ipsum is simply dummy text of the");
@@ -108,6 +137,7 @@ function doneTodo(id) {
     axios.put(`http://localhost:3000/todo`, { id: id }).then((res) => {
         //console.log(res);
         getData().then((r) => {
+            socket.emit("action", "done");
             showData(r.data);
         });
     });
@@ -115,7 +145,7 @@ function doneTodo(id) {
 
 function updateTodo(el, id) {
     el.target.removeAttribute("readonly");
-    console.log(el.target);
+    //console.log(el.target);
 }
 
 function sendUpdateTodo(el, id) {
@@ -129,8 +159,9 @@ function sendUpdateTodo(el, id) {
                 content: content,
             })
             .then((res) => {
-                console.log(res);
+                //console.log(res);
                 getData().then((r) => {
+                    socket.emit("action", "update");
                     showData(r.data);
                 });
             });

@@ -291,3 +291,25 @@ body {
   justify-content: center;
   flex-direction: row-reverse;
 }
+
+
+// -------------
+
+.notyf__toast--lower {
+	 margin-top: 15px !important; 
+}
+
+.notyf__message {
+	line-height: 25px;
+  padding-block: 0;
+  font-size: 14px;
+}
+
+.notyf__wrapper {
+	padding: 10px;
+}
+
+.todo-notyf{
+  border: 2px solid rgba(81, 229, 255, 0.1);
+  border-radius: 4px;
+}
