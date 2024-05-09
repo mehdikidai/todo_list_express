@@ -1,7 +1,7 @@
 import "./style.scss";
 import axios from "axios";
 import { z } from "zod";
-import moment from './node_modules/moment/dist/moment.js';
+import moment from "./node_modules/moment/dist/moment.js";
 
 let list = document.getElementById("list");
 
@@ -9,11 +9,11 @@ const contentSchema = z.string().min(2).max(40).trim();
 
 function td(el) {
     return `<li class="li_list">
-  <div class="${el.done ? 'date_todo done' : 'date_todo'}">
+  <div class="${el.done ? "date_todo done" : "date_todo"}">
   <span>${moment(el.date).fromNow()}</span>
   </div>
   <div class="content">
-
+      <span class="${el.done ? "done" : ""}"></span>
       <input type="text" data-id="${el.id}" value="${el.content}" class="${
         el.done ? "done input_content_show" : "input_content_show"
     }" readonly>
@@ -23,7 +23,9 @@ function td(el) {
       <button class="delete_todo" data-id="${el.id}">
           <i class="material-symbols-outlined"> delete </i>
       </button>
-      <button class="${el.done ? 'done_todo active' : 'done_todo'}" data-id="${el.id}">
+      <button class="${el.done ? "done_todo active" : "done_todo"}" data-id="${
+        el.id
+    }">
           <i class="material-symbols-outlined"> ${
               el.done ? "bookmark" : "done"
           }  </i>
@@ -50,7 +52,13 @@ form.addEventListener("submit", (e) => {
                 todo_text.value = "";
             });
     } else {
-        alert("null");
+        swal({
+            title: "mkin walo ?",
+            text:"Lorem Ipsum is simply dummy",
+            button: {
+                text: "Close",
+            },
+        });
     }
 });
 
@@ -66,7 +74,7 @@ getData().then((res) => {
 function showData(arr) {
     list.innerHTML = "";
 
-    console.log(arr)
+    console.log(arr);
 
     arr.forEach((el) => {
         list.innerHTML += td(el);
@@ -85,13 +93,11 @@ function deletTodo(id) {
             axios.delete(`http://localhost:3000/todo/${id}`).then((res) => {
                 console.log(res.data.affectedRows);
                 if (res.data.affectedRows === 1) {
-                  getData().then((r) => {
-                    showData(r.data);
-                    //swal("Good job", "Lorem Ipsum is simply dummy text of the");
-                });
-                  
+                    getData().then((r) => {
+                        showData(r.data);
+                        //swal("Good job", "Lorem Ipsum is simply dummy text of the");
+                    });
                 }
-                
             });
         }
     });

@@ -30,6 +30,30 @@ body {
     min-width: 320px;
     min-height: 100vh;
     background: var(--bgcolor);
+    --sb-track-color: #1b3244;
+    --sb-thumb-color: #51e5ff;
+    --sb-size: 6px;
+}
+
+
+::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body {
+        scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    }
 }
 
 .box_todo {
@@ -51,18 +75,18 @@ body {
         display: flex;
         flex-direction: column;
         gap: 20px;
-        .tit_app{
-          height: 120px;
-          //background: red;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          h1{
-            font-size: 40px !important;
-            text-transform: uppercase;
-            color: #fff;
-            user-select: none;
-          }
+        .tit_app {
+            height: 120px;
+            //background: red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            h1 {
+                font-size: 40px !important;
+                text-transform: uppercase;
+                color: #fff;
+                user-select: none;
+            }
         }
         form {
             display: flex;
@@ -106,7 +130,7 @@ body {
     .list {
         flex: 1;
         //background: darkorange;
-        overflow-y: scroll;
+        //overflow-y: scroll;
         //border: 2px solid #51e5ff1f;
         //border-radius: 10px;
         ul {
@@ -144,6 +168,20 @@ body {
                     flex: 1;
                     //background: #51e5ff;
                     padding-inline: 15px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    span {
+                        width: 8px;
+                        height: 8px;
+                        background: #1e4152;
+                        display: block;
+                        border-radius: 50%;
+                        transform: translateY(1px);
+                        &.done {
+                            background: #21bf65;
+                        }
+                    }
                     input {
                         line-height: 40px;
                         font-size: 16px;
@@ -205,6 +243,7 @@ body {
     background: lighten(#172a3a, 0%) !important;
     border: 2px solid rgba(81, 229, 255, 0.1215686275) !important;
     margin: 80px auto;
+    width: 400px !important;
     .swal-text {
         font-size: 14px;
         text-transform: capitalize;
@@ -230,9 +269,20 @@ body {
     .swal-icon {
         display: none !important;
     }
+    .swal-button-container {
+      margin: 0;
+    }
 }
 
 .swal-overlay {
     display: flex;
     align-items: start;
+}
+
+.swal-footer {
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-direction: row-reverse;
 }
