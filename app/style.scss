@@ -57,6 +57,7 @@ body {
     }
 }
 
+
 .box_todo {
     max-width: 550px;
     width: calc(100vw - 20px);
@@ -76,8 +77,9 @@ body {
         display: flex;
         flex-direction: column;
         gap: 20px;
+        z-index: 2;
         .tit_app {
-            height: 120px;
+            height: 170px;
             //background: red;
             display: flex;
             align-items: center;
@@ -88,6 +90,7 @@ body {
                 font-family: "Press Start 2P", system-ui;
                 color: #fff;
                 user-select: none;
+                //text-shadow: 4px 4px #000;
             }
         }
         form {
