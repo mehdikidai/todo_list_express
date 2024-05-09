@@ -58,7 +58,7 @@ body {
 }
 
 .box_todo {
-    max-width: 650px;
+    max-width: 550px;
     width: calc(100vw - 20px);
     min-height: 450px;
     //background: red;
@@ -147,6 +147,8 @@ body {
                 //flex-direction: row-reverse;
                 border-radius: 4px;
                 border: 2px solid #51e5ff1f;
+                transition: all .4s ease-in;
+                
                 .date_todo {
                     width: auto;
                     padding-inline: 15px;
@@ -244,8 +246,9 @@ body {
     //background: li(#172a3a, 4%) !important;
     background: lighten(#172a3a, 0%) !important;
     border: 2px solid rgba(81, 229, 255, 0.1215686275) !important;
-    margin: 80px auto;
-    width: 400px !important;
+    margin: 200px auto 50px;
+    max-width: 360px !important;
+    width: 90vw !important;
     .swal-text {
         font-size: 14px;
         text-transform: capitalize;
