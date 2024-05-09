@@ -16,13 +16,15 @@ class Todo {
     }
 
     async all() {
+        
         const [rows] = await pool.query(
-            "SELECT * FROM todo  ORDER BY todo.id DESC"
+            "SELECT * FROM todo  ORDER BY todo.id DESC LIMIT 8"
         );
         return rows;
     }
 
     async find(id) {
+
         const [rows] = await pool.query("SELECT * FROM todo WHERE id = ?", [
             id,
         ]);
@@ -30,12 +32,26 @@ class Todo {
     }
 
     async addTodo(content) {
+
+        const newContent = content.replace(/<[^>]+>/g,"")
+
         const [result] = await pool.query(
             `INSERT INTO todo (content) VALUES (?)`,
-            [content]
+            [newContent]
         );
         return {
             id: result.insertId,
+        };
+    }
+
+    async update(id, content) {
+        const newContent = content.replace(/<[^>]+>/g,"")
+        const [result] = await pool.query(
+            `UPDATE todo SET content = ? WHERE todo.id = ?`,
+            [newContent, id]
+        );
+        return {
+            affectedRows: result,
         };
     }
 

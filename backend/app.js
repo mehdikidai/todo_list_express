@@ -27,9 +27,21 @@ app.post("/todo",async (req, res) => {
 
 });
 
+app.post("/update/todo",async (req, res) => {
+
+    const {id,content} = req.body
+    const row = await Todo.update(id,content)
+    res.status(201).json(row);
+
+});
+
 app.get("/todo/:id([0-9]{1,4})",async (req, res) => {
 
     const [row] = await Todo.find(req.params.id)
+    if (row == null) {
+        res.status(401).json({msg:"mkin walo"});
+        return
+    }
     res.status(201).json(row);
 
 });

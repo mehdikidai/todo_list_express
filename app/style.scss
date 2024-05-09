@@ -1,165 +1,222 @@
 @import "./css/config";
 @import "./css/nav";
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Red Hat Display", sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Red Hat Display", sans-serif;
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  --bgcolor:#172a3a;
-  --main:#51e5ff;
+    --bgcolor: #172a3a;
+    --main: #51e5ff;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+    color: #535bf2;
 }
 
 body {
-  min-width: 320px;
-  min-height: 100vh;
-  background: var(--bgcolor);
-}
-
-
-.box_todo{
-  max-width: 650px;
-  width: calc(100vw - 20px);
-  min-height: 450px;
-  //background: red;
-  margin: 0 auto 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  .form_div{
-    padding-top: 100px;
-    padding-bottom: 30px;
+    min-width: 320px;
+    min-height: 100vh;
     background: var(--bgcolor);
-    position: sticky;
-    border-bottom:2px dashed rgba(81, 229, 255, 0.1);;
-    top: 0px;
-    form{
-      display: flex;
-      gap: 10px;
-      height: 44px;
-      //background: blue;
-      height: 44px;
-      input[type="text"]{
-        flex: 1;
-        height: 100%;
-        padding-inline: 20px;
-        background: none;
-        border: 2px solid rgba(81, 229, 255, 0.1);
-        border-radius: 4px;
-        color: #fff;
-        font-size: 14px;
-        
-        &:focus{
-          outline: none;
-          box-shadow: none;
-        }
-        
-      }
-      button{
-        width: 44px;
-        border: none;
-        background: transparent;
-        border: 2px solid rgba(81, 229, 255, 0.1);
-        border-radius: 4px;
-        color: #fff;
-        font-size: 14px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        i{
-          font-size: 16px;
-        }
-        
-      }
-
-    }
-  }
-  .list{
-    flex: 1;
-    //background: darkorange;
-    overflow-y: scroll;
-    //border: 2px solid #51e5ff1f;
-    //border-radius: 10px;
-    ul{
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      li{
-        //background: blue;
-        height: 44px;
-        //padding-inline: 20px;
-        display: flex;
-        border-radius: 4px;
-        border: 2px solid #51e5ff1f;
-        .content{
-          flex: 1;
-          //background: #51e5ff;
-          padding-inline: 20px;
-          input{
-            line-height: 40px;
-            font-size: 16px;
-            font-weight: 400;
-            width: 100%;
-            color: #fff;
-            border: none;
-            background: transparent;
-            &:focus{
-              outline: none;
-              box-shadow: none;
-            }
-            &.done{
-              color: #21BF65;
-              text-decoration: line-through;
-            }
-
-          }
-        }
-        .actions{
-          width: auto;
-          //background: red;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-direction: row-reverse;
-          gap: 6px;
-          padding-inline: 6px;
-          button{
-            width: 28px;
-            height: 28px;
-            border: none;
-            background: transparent;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 2px solid rgba(81, 229, 255, 0.1);
-            i{
-              font-size: 16px;
-              color: rgba(81, 229, 255, 0.6);
-              pointer-events: none;
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
+.box_todo {
+    max-width: 650px;
+    width: calc(100vw - 20px);
+    min-height: 450px;
+    //background: red;
+    margin: 0 auto 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .form_div {
+        padding-top: 100px;
+        padding-bottom: 30px;
+        background: var(--bgcolor);
+        position: sticky;
+        border-bottom: 2px dashed rgba(81, 229, 255, 0.1);
+        top: 0px;
+        form {
+            display: flex;
+            gap: 10px;
+            height: 44px;
+            //background: blue;
+            height: 44px;
+            input[type="text"] {
+                flex: 1;
+                height: 100%;
+                padding-inline: 20px;
+                background: none;
+                border: 2px solid rgba(81, 229, 255, 0.1);
+                border-radius: 4px;
+                color: #fff;
+                font-size: 14px;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+            button {
+                width: 44px;
+                border: none;
+                background: transparent;
+                border: 2px solid rgba(81, 229, 255, 0.1);
+                border-radius: 4px;
+                color: #fff;
+                font-size: 14px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                i {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    .list {
+        flex: 1;
+        //background: darkorange;
+        overflow-y: scroll;
+        //border: 2px solid #51e5ff1f;
+        //border-radius: 10px;
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            li {
+                //background: blue;
+                height: 44px;
+                //padding-inline: 20px;
+                display: flex;
+                //flex-direction: row-reverse;
+                border-radius: 4px;
+                border: 2px solid #51e5ff1f;
+                .date_todo {
+                    width: auto;
+                    padding-inline: 15px;
+                    background: transparent;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    pointer-events: none;
+                    display: none;
+                    span {
+                        font-size: 12px;
+                        color: rgba(255, 255, 255, 0.52);
+                    }
+                    &.done {
+                        i {
+                            color: #21bf65;
+                        }
+                    }
+                }
+                .content {
+                    flex: 1;
+                    //background: #51e5ff;
+                    padding-inline: 15px;
+                    input {
+                        line-height: 40px;
+                        font-size: 16px;
+                        font-weight: 400;
+                        width: 100%;
+                        color: #fff;
+                        border: none;
+                        background: transparent;
+                        cursor: pointer;
+                        &:focus {
+                            outline: none;
+                            box-shadow: none;
+                        }
+                        &.done {
+                            color: #21bf65;
+                            text-decoration: line-through;
+                        }
+                    }
+                }
+                .actions {
+                    width: auto;
+                    //background: red;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-direction: row-reverse;
+                    gap: 0;
+                    padding-inline: 6px;
+                    button {
+                        width: 28px;
+                        height: 28px;
+                        border: none;
+                        background: transparent;
+                        border-radius: 4px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        border: none;
+                        &.active {
+                            i {
+                                color: #21bf65;
+                            }
+                        }
+                        i {
+                            font-size: 16px;
+                            color: rgba(81, 229, 255, 0.6);
+                            pointer-events: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.swal-modal {
+    //background: li(#172a3a, 4%) !important;
+    background: lighten(#172a3a, 0%) !important;
+    border: 2px solid rgba(81, 229, 255, 0.1215686275) !important;
+    margin: 80px auto;
+    .swal-text {
+        font-size: 14px;
+        text-transform: capitalize;
+        text-align: center;
+        color: #fff;
+    }
+    .swal-title {
+        color: var(--main) !important;
+        font-size: 20px;
+    }
+    .swal-button {
+        padding-inline: 16px !important;
+        padding-block: 8px !important;
+        border: 2px solid rgba(81, 229, 255, 0.1215686275) !important;
+        background: transparent !important;
+        color: #fff !important;
+        &:active,
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+    .swal-icon {
+        display: none !important;
+    }
+}
+
+.swal-overlay {
+    display: flex;
+    align-items: start;
+}
