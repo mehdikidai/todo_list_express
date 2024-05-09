@@ -42,12 +42,28 @@ body {
     flex-direction: column;
     gap: 30px;
     .form_div {
-        padding-top: 100px;
+        padding-top: 20px;
         padding-bottom: 30px;
         background: var(--bgcolor);
         position: sticky;
         border-bottom: 2px dashed rgba(81, 229, 255, 0.1);
         top: 0px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .tit_app{
+          height: 120px;
+          //background: red;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          h1{
+            font-size: 40px !important;
+            text-transform: uppercase;
+            color: #fff;
+            user-select: none;
+          }
+        }
         form {
             display: flex;
             gap: 10px;
