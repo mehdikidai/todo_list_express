@@ -91,7 +91,7 @@ form.addEventListener("submit", (e) => {
 });
 
 async function getData() {
-    const a = await axios("http://localhost:3000/");
+    const a = await axios("http://localhost:3000/todo");
     return a;
 }
 
@@ -154,7 +154,7 @@ function sendUpdateTodo(el, id) {
     const content = el.target.value;
     if (contentSchema.safeParse(content).success) {
         axios
-            .post(`http://localhost:3000/update/todo`, {
+            .post(`http://localhost:3000/todo/update`, {
                 id: id,
                 content: content,
             })
