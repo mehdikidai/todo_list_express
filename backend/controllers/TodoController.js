@@ -4,7 +4,7 @@ class TodoController {
 
     static index = async (req, res) => {
         const rows = await Todo.all();
-        res.json(rows);
+        res.status(201).json(rows);
     };
 
     // --------------
@@ -31,7 +31,7 @@ class TodoController {
             res.status(401).json({ msg: "mkin walo" });
             return;
         }
-        res.status(201).json(row);
+        res.status(200).json(row);
     };
 
     // --------------
